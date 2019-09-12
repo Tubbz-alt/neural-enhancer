@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="row text-center" onload="configureLayout">
+  <h1>{{ title}}</h1>
+  <input id="myinput" type="file" onchange="encode();" />
+  <img id="inputImage" width="500" style="height: auto;"></img>
+  <img id="outputImage" width="500" style="height: auto;">
+</div>
+<br/><br/>
+<div class="row text-center">
+  <button class="btn btn-primary" id="clearButton">Clear</button>
+  <button class="btn btn-primary" id="sendButton">Send data</button>
+</div>
+
+<script type="text/javascript">
+
+	function configureLayout() {
+		var input_canvas = document.getElementByID('inputCanvas')
+		var output_image = document.getElementByID('outputImage')
+
+		output_image.position.top = input_canvas.position.top 
+		
+	}
+
+	function encode() {
+
+		console.log("ENCODE")
+	    var selectedfile = document.getElementById("myinput").files;
+	    if (selectedfile.length > 0) {
+	      var imageFile = selectedfile[0];
+	      var fileReader = new FileReader();
+	      fileReader.onload = function(fileLoadedEvent) {
+	        var srcData = fileLoadedEvent.target.result;
+	        var input_image = document.getElementById("inputImage");
+	        input_image.src = srcData;
+	      }
+	      fileReader.readAsDataURL(imageFile);
+	    }
+	  }
+</script>
+{% endblock %}

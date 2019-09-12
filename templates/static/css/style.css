@@ -1,0 +1,35 @@
+.btn{
+    background-color: rgb(102,153,255);
+}
+canvas {
+    border: 2px solid rgb(102,153,255);
+}
+image {
+	padding: 8px 8px;
+	border: 2px solid rgb(102,153,255);
+}
+#footer{
+    margin-top: 100px;
+}
+
+image:not(:last-child):after {
+  content: '';
+  height: 1px;
+  background: black;
+  width: 50px;
+  position: absolute;
+  right: -50px;
+  top: 50%;
+}
+image:not(:last-child):before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  border-style: solid;
+  border-width: 7px 0 7px 20px;
+  border-color: transparent transparent transparent black;
+  right: -50px;
+  transform: translateY(-50%);
+}
