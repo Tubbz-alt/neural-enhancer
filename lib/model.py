@@ -155,7 +155,7 @@ def test_data_loader(FLAGS):
 
     # Read in and preprocess the images
     def preprocess_test(name, mode):
-        im = matplotlib.pyplot.imread(name, mode="RGB").astype(np.float32)
+        im = matplotlib.pyplot.imread(name).astype(np.float32)
         # im = sic.imread(name, mode="RGB").astype(np.float32)
         # check grayscale image
         if im.shape[-1] != 3:
@@ -199,7 +199,7 @@ def inference_data_loader(FLAGS):
 
     # Read in and preprocess the images
     def preprocess_test(name):
-        im = matplotlib.pyplot.imread(name, mode="RGB").astype(np.float32)
+        im = matplotlib.pyplot.imread(name).astype(np.float32)
         # im = sic.imread(name, mode="RGB").astype(np.float32)
         # check grayscale image
         if im.shape[-1] != 3:
