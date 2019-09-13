@@ -96,6 +96,7 @@ def get_file_content(uuid):
         return file.read()
     
 if __name__ == '__main__':
+    print("STARTING UP")
     app.run()
 
 
