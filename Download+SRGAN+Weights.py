@@ -22,8 +22,10 @@ def download_file_from_google_drive(id, destination):
         with open(destination, "wb") as f:
             print("WRITING")
             for chunk in response.iter_content(CHUNK_SIZE):
+                print("ANOTHER ONE")
                 if chunk: # filter out keep-alive new chunks
                     f.write(chunk)
+            print("YOU DONE NOW")
 
     URL = "https://docs.google.com/uc?export=download"
 
