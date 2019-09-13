@@ -94,7 +94,9 @@ def create_csv(text):
 def get_file_content(uuid):
     with open('images/'+uuid+'.csv', 'r') as file:
         return file.read()
-
+    
+if __name__ == '__main__':
+    app.run()
 
 
 
