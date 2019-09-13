@@ -23,6 +23,42 @@ import numpy as np
 
 import base64
 
+import requests
+
+def download_file_from_google_drive(id, destination):
+    def get_confirm_token(response):
+        for key, value in response.cookies.items():
+            if key.startswith('download_warning'):
+                return value
+
+        return None
+
+    def save_response_content(response, destination):
+        CHUNK_SIZE = 32768
+
+        with open(destination, "wb") as f:
+            print("WRITING")
+            for chunk in response.iter_content(CHUNK_SIZE):
+                if chunk: # filter out keep-alive new chunks
+                    f.write(chunk)
+                    
+        print("UNZIPPING...")
+        !tar xvf 'SRGAN_pre-trained.tar'
+        print("UNZIPPED...")
+        
+    URL = "https://docs.google.com/uc?export=download"
+
+    session = requests.Session()
+
+    response = session.get(URL, params = { 'id' : id }, stream = True)
+    token = get_confirm_token(response)
+
+    if token:
+        params = { 'id' : id, 'confirm' : token }
+        response = session.get(URL, params = params, stream = True)
+
+    save_response_content(response, destination)
+
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.debug = True
@@ -31,6 +67,16 @@ app._static_folder = os.path.abspath("templates/static/")
 @app.route('/', methods=['GET'])
 def index():
     title = 'Create the input'
+    
+    # TAKE ID FROM SHAREABLE LINK
+    file_id = '0BxRIhBA0x8lHNDJFVjJEQnZtcmc'
+    # DESTINATION FILE ON YOUR DISK
+    destination = "SRGAN_pre-trained.tar"
+    
+    print("STARTING DOWNLOAD...")
+    download_file_from_google_drive(file_id, destination)
+    print("ENDING DOWNLOAD...")
+    
     return render_template('layouts/index.html',
                            title=title)
 
