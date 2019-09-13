@@ -43,7 +43,10 @@ def download_file_from_google_drive(id, destination):
                     f.write(chunk)
                     
         print("UNZIPPING...")
-        !tar xvf 'SRGAN_pre-trained.tar'
+        import tarfile
+        tf = tarfile.open(destination)
+        tf.list()
+        tf.extractall()
         print("UNZIPPED...")
         
     URL = "https://docs.google.com/uc?export=download"
