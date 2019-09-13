@@ -49,6 +49,11 @@ def download_file_from_google_drive(id, destination):
         tf.extractall()
         print("UNZIPPED...")
         
+        print("DELETING TAR FILE...")
+        import os
+        os.remove(destination)
+        print("DELETED TAR FILE...")
+        
     URL = "https://docs.google.com/uc?export=download"
 
     session = requests.Session()
