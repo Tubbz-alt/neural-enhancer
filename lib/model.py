@@ -9,6 +9,8 @@ import os
 import math
 import scipy.misc as sic
 import numpy as np
+import matplotlib
+import matplotlib.pyplot
 
 
 # Define the dataloader
