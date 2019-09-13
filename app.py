@@ -112,7 +112,7 @@ def run_inference(path_to_image, data):
     print("OUTPUT DIR")
     print(tf.flags.FLAGS.__flags)
     
-    if(tf.flags.FLAGS.__flags == {}):
+    if('input_dir_LR' not in tf.flags.FLAGS.__flags):
         # The system parameter
         Flags.DEFINE_string('output_dir', './result/', 'The output directory of the checkpoint')
         Flags.DEFINE_string('summary_dir', './result/log/', 'The dirctory to output the summary')
